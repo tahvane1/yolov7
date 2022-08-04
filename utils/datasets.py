@@ -801,7 +801,10 @@ def load_mosaic9(self, index,channels):
 
         # place img in img9
         if i == 0:  # center
-            img9 = np.full((s * 3, s * 3, img.shape[2]), 114, dtype=np.uint8)  # base image with 4 tiles
+            if channels == 1:
+                img9 = np.full((s * 3, s * 3), 114, dtype=np.uint8)  # base image with 4 tiles
+            else:
+                img9 = np.full((s * 3, s * 3, img.shape[2]), 114, dtype=np.uint8)  # base image with 4 tiles
             h0, w0 = h, w
             c = s, s, s + w, s + h  # xmin, ymin, xmax, ymax (base) coordinates
         elif i == 1:  # top
